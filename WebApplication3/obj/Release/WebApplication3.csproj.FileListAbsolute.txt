@@ -71,8 +71,8 @@ C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\bin\System.
 C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\bin\Newtonsoft.Json.xml
 C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\bin\Antlr3.Runtime.pdb
 C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Debug\WebApplication3.dll
-C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Debug\WebApplication3.pdb
-C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csproj.AssemblyReference.cache
-C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csproj.CoreCompileInputs.cache
-C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csproj.CopyComplete
+C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Release\WebApplication3.csproj.AssemblyReference.cache
+C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Release\WebApplication3.csproj.CoreCompileInputs.cache
+C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Release\WebApplication3.csproj.CopyComplete
+C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Release\WebApplication3.dll
+C:\Users\finextqadeploy\source\repos\WebApplication3\WebApplication3\obj\Release\WebApplication3.pdb
