@@ -1,0 +1,42 @@
+##connectivity
+cls 
+$ip = Get-Content -Path 'C:\JenkinsWordspace\.jenkins\workspace\ip.txt'
+foreach($ip1 in $ip)
+{
+ 
+
+ $Server = Test-Connection $ip1 -ErrorAction SilentlyContinue -Quiet
+ if($Server -eq "True"){
+ $Server = Test-Connection $ip1 -ErrorAction SilentlyContinue
+ write-Output $server}else{
+ Write-Output $ip1
+ throw "Not Connceted"
+ }
+
+ ##deploy
+ $package = 'C:\JenkinsWordspace\.jenkins\workspace\dotnetPublish\Publish.zip'
+$username = 'finextqadeploy'
+$password = 'B!llb0r!lD824'
+$serverIpOrHostname = 'localhost'
+$msDeployPort = '8010'
+$endpoint = "https://${serverIpOrHostname}:${msDeployPort}/MSDeploy.axd"
+$iisWebsiteName = 'test'
+
+# with -whatIf flag provided, msdeploy just shows what's gonna happen without
+# remove the line with -whatIf flag to make real deployment
+msdeploy -source:package=$package `
+     -whatIf `
+     -verb:sync `
+     -allowUntrusted `
+     -dest:auto,ComputerName=`"$endpoint`",UserName=`"$username`",Password=`"$password`",IncludeAcls=False,AuthType=Basic `
+     -setParam:name=`"IIS Web Application Name`",value=`"$iisWebsiteName`" `
+     -disableLink:AppPoolExtension `
+     -disableLink:ContentExtension `
+     -disableLink:CertificateExtension
+     
+##publish script
+$src="C:\JenkinsWordspace\.jenkins\workspace\dotnetPublish"
+$latest1 = Get-ChildItem -Path $src\Publish | Sort-Object LastAccessTime -Descending | Select-Object -First 1
+Compress-Archive -path "$src\Publish*" -destination $src\Publish.zip -force
+New-Item -Path "$src\Zipped" -ItemType Directory -force
+Copy-Item -Path $src\*.zip -Destination "$src\Zipped" -force
