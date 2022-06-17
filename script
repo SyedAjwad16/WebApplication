@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    		
+    parameters{string(defaultValue: 'main', description: '', name: 'Branch_Name', trim: false)}
+   
+      
+   stages {
+       
+        stage('connect') {
+          
+           
+            steps { 
+               bat label: '', script: 'powershell -noprofile -command "$ErrorActionPreference" = \'Stop\'; Set-PsDebug -Strict; C:\\JenkinsWordspace\\.jenkins\\workspace\\ping.ps1'
+            }
+        }
+        stage('clone') {
+          
+           
+            steps { 
+                git branch: "${params.Branch_Name}" ,url: 'https://github.com/SyedAjwad16/WebApplication.git'
+            }
+        }
+        stage('build'){
+            steps{
+             bat "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\"  C:\\JenkinsWordspace\\.jenkins\\workspace\\dotnet\\WebApplication3\\WebApplication3.csproj -t:rebuild /p:Configuration=Release /p:DeployOnBuild=True \"/p:PublishProfile=C:\\JenkinsWordspace\\.jenkins\\workspace\\dotnet\\WebApplication3\\Properties\\PublishProfiles\\FolderProfile6.pubxml\" /p:publishUrl=C:\\JenkinsWordspace\\.jenkins\\workspace\\dotnetPublish\\Publish /p:DeployOnBuild=True"
+            
+            }
+        }
+        stage('Publish'){
+				steps{
+					bat label: '', script: 'powershell -noprofile -command "$ErrorActionPreference" = \'Stop\'; Set-PsDebug -Strict; C:\\JenkinsWordspace\\.jenkins\\workspace\\dotnetPublish\\Publish.ps1'
+				}
+			}
+	   stage('Deploy'){
+	       steps{
+	         bat label: '', script: 'powershell C:\\JenkinsWordspace\\.jenkins\\workspace\\dotnetPublish\\deploy.ps1'
+	   }  
+	   }
+	
+     
+       
+    }
+  
+}
